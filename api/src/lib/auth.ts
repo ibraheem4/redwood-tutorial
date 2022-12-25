@@ -1,25 +1,60 @@
-/**
- * Once you are ready to add authentication to your application
- * you'll build out requireAuth() with real functionality. For
- * now we just return `true` so that the calls in services
- * have something to check against, simulating a logged
- * in user that is allowed to access that service.
- *
- * See https://redwoodjs.com/docs/authentication for more info.
- */
-export const isAuthenticated = () => {
-  return true
+import type { DbAuthSession } from '@redwoodjs/api'
+import { AuthenticationError, ForbiddenError } from '@redwoodjs/graphql-server'
+
+import { db } from './db'
+
+export const getCurrentUser = async (session: DbAuthSession<number>) => {
+  return await db.user.findUnique({
+    where: { id: session.id },
+    select: { id: true },
+  })
 }
 
-export const hasRole = ({ roles }) => {
-  return roles !== undefined
+export const isAuthenticated = (): boolean => {
+  return !!context.currentUser
 }
 
-// This is used by the redwood directive
-// in ./api/src/directives/requireAuth
+type AllowedRoles = string | string[] | undefined
 
-// Roles are passed in by the requireAuth directive if you have auth setup
-// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-export const requireAuth = ({ roles }) => {
-  return isAuthenticated()
+export const hasRole = (roles: AllowedRoles): boolean => {
+  if (!isAuthenticated()) {
+    return false
+  }
+
+  const currentUserRoles = context.currentUser?.roles
+
+  if (typeof roles === 'string') {
+    if (typeof currentUserRoles === 'string') {
+      // roles to check is a string, currentUser.roles is a string
+      return currentUserRoles === roles
+    } else if (Array.isArray(currentUserRoles)) {
+      // roles to check is a string, currentUser.roles is an array
+      return currentUserRoles?.some((allowedRole) => roles === allowedRole)
+    }
+  }
+
+  if (Array.isArray(roles)) {
+    if (Array.isArray(currentUserRoles)) {
+      // roles to check is an array, currentUser.roles is an array
+      return currentUserRoles?.some((allowedRole) =>
+        roles.includes(allowedRole)
+      )
+    } else if (typeof currentUserRoles === 'string') {
+      // roles to check is an array, currentUser.roles is a string
+      return roles.some((allowedRole) => currentUserRoles === allowedRole)
+    }
+  }
+
+  // roles not found
+  return false
+}
+
+export const requireAuth = ({ roles }: { roles?: AllowedRoles } = {}) => {
+  if (!isAuthenticated()) {
+    throw new AuthenticationError("You don't have permission to do that.")
+  }
+
+  if (roles && !hasRole(roles)) {
+    throw new ForbiddenError("You don't have access to do that.")
+  }
 }
