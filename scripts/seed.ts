@@ -3,33 +3,32 @@ import { db } from 'api/src/lib/db'
 
 export default async () => {
   try {
-    //
-    // Manually seed via `yarn rw prisma db seed`
-    // Seeds automatically with `yarn rw prisma migrate dev` and `yarn rw prisma migrate reset`
-    //
-    // Update "const data = []" to match your data model and seeding needs
-    //
-    const data: Prisma.UserExampleCreateArgs['data'][] = [
-      // To try this example data with the UserExample model in schema.prisma,
-      // uncomment the lines below and run 'yarn rw prisma migrate dev'
-      //
-      // { name: 'alice', email: 'alice@example.com' },
-      // { name: 'mark', email: 'mark@example.com' },
-      // { name: 'jackie', email: 'jackie@example.com' },
-      // { name: 'bob', email: 'bob@example.com' },
+    const data: Prisma.UserCreateArgs['data'][] = [
+      {
+        id: 1,
+        name: null,
+        email: 'admin@admin.com',
+        hashedPassword:
+          '9e2038890dd6370bed2e80b0ee17109876a5f94b76c2baaf83c5225bc559df54',
+        salt: 'a271de3ce442031a61bf70166644437b',
+        resetToken: null,
+        resetTokenExpiresAt: null,
+      },
     ]
-    console.log(
-      "\nUsing the default './scripts/seed.{js,ts}' template\nEdit the file to add seed data\n"
-    )
+    console.info('')
+    console.info('  Seeding admin user:')
+    console.info('')
+    console.info('    Email: admin@admin.com')
+    console.info('    Password: AdminPassword')
+    console.info('')
+    console.info(`  (Please don't use this login in a production environment)`)
+    console.info('')
 
     // Note: if using PostgreSQL, using `createMany` to insert multiple records is much faster
     // @see: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#createmany
     Promise.all(
-      //
-      // Change to match your data model and seeding needs
-      //
-      data.map(async (data: Prisma.UserExampleCreateArgs['data']) => {
-        const record = await db.userExample.create({ data })
+      data.map(async (data: Prisma.UserCreateArgs['data']) => {
+        const record = await db.user.create({ data })
         console.log(record)
       })
     )
