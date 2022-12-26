@@ -9,7 +9,6 @@ export const handler = async (
   event: APIGatewayProxyEvent,
   context: Context
 ) => {
-
   const forgotPasswordOptions: DbAuthHandlerOptions['forgotPassword'] = {
     // handler() is invoked after verifying that a user was found with the given
     // username. This is where you can send the user an email with a link to
@@ -135,7 +134,7 @@ export const handler = async (
   }
 
   const authHandler = new DbAuthHandler(event, context, {
-  cors: { origin: process.env.REDWOOD_WEB_URL, credentials: true },
+    cors: { origin: process.env.REDWOOD_WEB_URL, credentials: true },
     // Provide prisma db client
     db: db,
 
