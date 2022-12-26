@@ -125,6 +125,6 @@ The best way to learn Redwood is by going through the comprehensive [tutorial](h
 ```
 yarn
 yarn rw g secret # add SESSION_SECRET to .env
-yarn rw prisma migrate dev # runs yarn rw prisma db seed
+yarn rw prisma migrate dev
 yarn rw dev
 ```
