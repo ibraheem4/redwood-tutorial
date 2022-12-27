@@ -1,12 +1,4 @@
-import type { Contact } from '@prisma/client'
-
-import {
-  contacts,
-  contact,
-  createContact,
-  updateContact,
-  deleteContact,
-} from './contacts'
+import { contacts, contact, createContact } from './contacts'
 import type { StandardScenario } from './contacts.scenarios'
 
 // Generated boilerplate tests do not account for all circumstances
@@ -23,37 +15,22 @@ describe('contacts', () => {
   })
 
   scenario('returns a single contact', async (scenario: StandardScenario) => {
-    const result = await contact({ id: scenario.contact.one.id })
+    const result = await contact({ id: scenario.contact.john.id })
 
-    expect(result).toEqual(scenario.contact.one)
+    expect(result).toEqual(scenario.contact.john)
   })
 
   scenario('creates a contact', async () => {
     const result = await createContact({
-      input: { name: 'String', email: 'String', message: 'String' },
+      input: {
+        name: 'Jane Doe',
+        email: 'jane@anonymous.com',
+        message: 'RedwoodJS is the best',
+      },
     })
 
-    expect(result.name).toEqual('String')
-    expect(result.email).toEqual('String')
-    expect(result.message).toEqual('String')
-  })
-
-  scenario('updates a contact', async (scenario: StandardScenario) => {
-    const original = (await contact({ id: scenario.contact.one.id })) as Contact
-    const result = await updateContact({
-      id: original.id,
-      input: { name: 'String2' },
-    })
-
-    expect(result.name).toEqual('String2')
-  })
-
-  scenario('deletes a contact', async (scenario: StandardScenario) => {
-    const original = (await deleteContact({
-      id: scenario.contact.one.id,
-    })) as Contact
-    const result = await contact({ id: original.id })
-
-    expect(result).toEqual(null)
+    expect(result.name).toEqual('Jane Doe')
+    expect(result.email).toEqual('jane@anonymous.com')
+    expect(result.message).toEqual('RedwoodJS is the best')
   })
 })

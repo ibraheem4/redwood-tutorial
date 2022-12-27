@@ -3,7 +3,7 @@ import { db } from 'api/src/lib/db'
 
 export default async () => {
   try {
-    const data: Prisma.UserCreateArgs['data'][] = [
+    const userData: Prisma.UserCreateArgs['data'][] = [
       {
         id: 1,
         name: null,
@@ -15,8 +15,18 @@ export default async () => {
         resetTokenExpiresAt: null,
       },
     ]
+
+    // Note: if using PostgreSQL, using `createMany` to insert multiple records is much faster
+    // @see: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#createmany
+    Promise.all(
+      userData.map(async (data: Prisma.UserCreateArgs['data']) => {
+        const record = await db.user.create({ data })
+        console.log(record)
+      })
+    )
+
     console.info('')
-    console.info('  Seeding admin user:')
+    console.info('  Seeded admin user:')
     console.info('')
     console.info('    Email: admin@admin.com')
     console.info('    Password: AdminPassword')
@@ -24,37 +34,30 @@ export default async () => {
     console.info(`  (Please don't use this login in a production environment)`)
     console.info('')
 
-    // Note: if using PostgreSQL, using `createMany` to insert multiple records is much faster
-    // @see: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#createmany
+    const postData: Prisma.PostCreateArgs['data'][] = [
+      {
+        id: 1,
+        title: 'Welcome to the blog!',
+        body: "I'm baby single- origin coffee kickstarter lo - fi paleo skateboard.Tumblr hashtag austin whatever DIY plaid knausgaard fanny pack messenger bag blog next level woke.Ethical bitters fixie freegan,helvetica pitchfork 90's tbh chillwave mustache godard subway tile ramps art party. Hammock sustainable twee yr bushwick disrupt unicorn, before they sold out direct trade chicharrones etsy polaroid hoodie. Gentrify offal hoodie fingerstache.",
+      },
+      {
+        id: 2,
+        title: 'A little more about me',
+        body: "Raclette shoreditch before they sold out lyft. Ethical bicycle rights meh prism twee. Tote bag ennui vice, slow-carb taiyaki crucifix whatever you probably haven't heard of them jianbing raw denim DIY hot chicken. Chillwave blog succulents freegan synth af ramps poutine wayfarers yr seitan roof party squid. Jianbing flexitarian gentrify hexagon portland single-origin coffee raclette gluten-free. Coloring book cloud bread street art kitsch lumbersexual af distillery ethical ugh thundercats roof party poke chillwave. 90's palo santo green juice subway tile, prism viral butcher selvage etsy pitchfork sriracha tumeric bushwick.",
+      },
+      {
+        id: 3,
+        title: 'What is the meaning of life?',
+        body: 'Meh waistcoat succulents umami asymmetrical, hoodie post-ironic paleo chillwave tote bag. Trust fund kitsch waistcoat vape, cray offal gochujang food truck cloud bread enamel pin forage. Roof party chambray ugh occupy fam stumptown. Dreamcatcher tousled snackwave, typewriter lyft unicorn pabst portland blue bottle locavore squid PBR&B tattooed.',
+      },
+    ]
+
     Promise.all(
-      data.map(async (data: Prisma.UserCreateArgs['data']) => {
-        const record = await db.user.create({ data })
+      postData.map(async (data: Prisma.PostCreateArgs['data']) => {
+        const record = await db.post.create({ data })
         console.log(record)
       })
     )
-
-    // If using dbAuth and seeding users, you'll need to add a `hashedPassword`
-    // and associated `salt` to their record. Here's how to create them using
-    // the same algorithm that dbAuth uses internally:
-    //
-    //   import { hashPassword } from '@redwoodjs/api'
-    //
-    //   const users = [
-    //     { name: 'john', email: 'john@example.com', password: 'secret1' },
-    //     { name: 'jane', email: 'jane@example.com', password: 'secret2' }
-    //   ]
-    //
-    //   for (user of users) {
-    //     const [hashedPassword, salt] = hashPassword(user.password)
-    //     await db.user.create({
-    //       data: {
-    //         name: user.name,
-    //         email: user.email,
-    //         hashedPassword,
-    //         salt
-    //       }
-    //     })
-    //   }
   } catch (error) {
     console.warn('Please define your seed data.')
     console.error(error)

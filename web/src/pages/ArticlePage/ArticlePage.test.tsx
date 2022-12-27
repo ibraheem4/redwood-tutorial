@@ -6,9 +6,12 @@ import ArticlePage from './ArticlePage'
 //   https://redwoodjs.com/docs/testing#testing-pages-layouts
 
 describe('ArticlePage', () => {
+  const article = {
+    id: 1,
+  }
   it('renders successfully', () => {
     expect(() => {
-      render(<ArticlePage />)
+      render(<ArticlePage id={article.id} />)
     }).not.toThrow()
   })
 })

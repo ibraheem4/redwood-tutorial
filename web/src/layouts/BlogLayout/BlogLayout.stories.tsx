@@ -2,7 +2,13 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import BlogLayout from './BlogLayout'
 
-export const generated: ComponentStory<typeof BlogLayout> = (args) => {
+export const loggedIn: ComponentStory<typeof BlogLayout> = (args) => {
+  mockCurrentUser({ id: 1, email: 'rob@redwoodjs.com' })
+
+  return <BlogLayout {...args} />
+}
+
+export const loggedOut: ComponentStory<typeof BlogLayout> = (args) => {
   return <BlogLayout {...args} />
 }
 

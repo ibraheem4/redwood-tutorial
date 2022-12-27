@@ -3,7 +3,7 @@ import type { ComponentMeta } from '@storybook/react'
 import ArticlePage from './ArticlePage'
 
 export const generated = () => {
-  return <ArticlePage />
+  return <ArticlePage id={1} />
 }
 
 export default {
