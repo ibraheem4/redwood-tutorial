@@ -13,21 +13,21 @@ const loggedOut = () => {
 describe('BlogLayout', () => {
   it('displays a Login link when not logged in', async () => {
     loggedOut()
-    render(<BlogLayout />)
+    render(<BlogLayout>Children</BlogLayout>)
 
     await waitFor(() => expect(screen.getByText('Login')).toBeInTheDocument())
   })
 
   it('displays a Logout link when logged in', async () => {
     loggedIn()
-    render(<BlogLayout />)
+    render(<BlogLayout>Children</BlogLayout>)
 
     await waitFor(() => expect(screen.getByText('Logout')).toBeInTheDocument())
   })
 
   it("displays a logged in user's email address", async () => {
     loggedIn()
-    render(<BlogLayout />)
+    render(<BlogLayout>Children</BlogLayout>)
 
     await waitFor(() =>
       expect(screen.getByText(`Logged in as ` + EMAIL)).toBeInTheDocument()
