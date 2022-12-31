@@ -130,3 +130,13 @@ yarn rw g secret # add SESSION_SECRET to .env
 yarn rw prisma migrate dev # runs yarn rw prisma db seed
 yarn rw dev
 ```
+
+## Enhancements
+
+ - Pre-commit lint
+ - Pre-push test
+ - Add commitlint
+ - Add missing tests and storybook from Redwood tutorial intermission
+ - Configure Netlify
+ - Configure Flightcontrol
+ - Setup Postgres
