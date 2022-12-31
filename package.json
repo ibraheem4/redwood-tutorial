@@ -12,6 +12,7 @@
     "@commitlint/config-conventional": "^17.3.0",
     "@redwoodjs/core": "3.8.0",
     "husky": "^8.0.2",
+    "lint-staged": ">=10",
     "prettier-plugin-tailwindcss": "^0.2.1"
   },
   "eslintConfig": {
@@ -26,7 +27,11 @@
     "seed": "yarn rw exec seed"
   },
   "packageManager": "yarn@3.3.0",
+  "lint-staged": {
+    "(web|api)/src/**/*.{js,jsx,ts,tsx}": "yarn rw lint --fix"
+  },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "husky install"
   }
 }
