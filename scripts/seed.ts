@@ -6,13 +6,14 @@ export default async () => {
     const userData: Prisma.UserCreateArgs['data'][] = [
       {
         id: 1,
-        name: null,
+        name: 'John Doe',
         email: 'admin@admin.com',
         hashedPassword:
           '9e2038890dd6370bed2e80b0ee17109876a5f94b76c2baaf83c5225bc559df54',
         salt: 'a271de3ce442031a61bf70166644437b',
         resetToken: null,
         resetTokenExpiresAt: null,
+        roles: 'admin',
       },
     ]
 
@@ -28,6 +29,7 @@ export default async () => {
     console.info('')
     console.info('  Seeded admin user:')
     console.info('')
+    console.info('    Name: John Doe')
     console.info('    Email: admin@admin.com')
     console.info('    Password: AdminPassword')
     console.info('')
