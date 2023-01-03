@@ -13,8 +13,10 @@ export const createComment = ({ input }: CreateCommentArgs) => {
   })
 }
 
-export const comments: QueryResolvers['comments'] = () => {
-  return db.comment.findMany()
+export const comments = ({
+  postId,
+}: Required<Pick<Prisma.CommentWhereInput, 'postId'>>) => {
+  return db.comment.findMany({ where: { postId } })
 }
 
 export const comment: QueryResolvers['comment'] = ({ id }) => {
