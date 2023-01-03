@@ -6,14 +6,25 @@ export default async () => {
     const userData: Prisma.UserCreateArgs['data'][] = [
       {
         id: 1,
-        name: 'John Doe',
+        name: 'Admin User',
         email: 'admin@admin.com',
         hashedPassword:
           '9e2038890dd6370bed2e80b0ee17109876a5f94b76c2baaf83c5225bc559df54',
         salt: 'a271de3ce442031a61bf70166644437b',
         resetToken: null,
         resetTokenExpiresAt: null,
-        roles: 'admin',
+        roles: ['admin'],
+      },
+      {
+        id: 1,
+        name: 'Moderator User',
+        email: 'moderator@moderator.com',
+        hashedPassword:
+          '830a417c433c10e98b576fcf833a09a1095b05456138947286a1b459ed0cc136',
+        salt: '1714d1a0952fdb253ea3e045fb8d2147',
+        resetToken: null,
+        resetTokenExpiresAt: null,
+        roles: ['moderator'],
       },
     ]
 

@@ -33,7 +33,7 @@ export const Comment: CommentRelationResolvers = {
 }
 
 export const deleteComment = ({ id }: Prisma.CommentWhereUniqueInput) => {
-  requireAuth({ roles: 'moderator' })
+  requireAuth({ roles: ['moderator', 'admin'] })
   return db.comment.delete({
     where: { id },
   })

@@ -41,7 +41,7 @@ describe('comments', () => {
     'allows a moderator to delete a comment',
     async (scenario: StandardScenario) => {
       mockCurrentUser({
-        roles: 'moderator',
+        roles: ['moderator'],
         id: 1,
         email: 'moderator@moderator.com',
       })
@@ -57,9 +57,28 @@ describe('comments', () => {
   )
 
   scenario(
-    'does not allow a non-moderator to delete a comment',
+    'allows an admin to delete a comment',
     async (scenario: StandardScenario) => {
-      mockCurrentUser({ roles: 'user', id: 1, email: 'user@user.com' })
+      mockCurrentUser({
+        roles: ['admin'],
+        id: 1,
+        email: 'admin@admin.com',
+      })
+
+      const comment = await deleteComment({
+        id: scenario.comment.jane.id,
+      })
+      expect(comment.id).toEqual(scenario.comment.jane.id)
+
+      const result = await comments({ postId: scenario.comment.jane.id })
+      expect(result.length).toEqual(0)
+    }
+  )
+
+  scenario(
+    'does not allow a non-moderator or non-admin to delete a comment',
+    async (scenario: StandardScenario) => {
+      mockCurrentUser({ roles: ['user'], id: 1, email: 'user@user.com' })
 
       expect(() =>
         deleteComment({

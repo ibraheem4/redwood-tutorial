@@ -51,7 +51,7 @@ const Comment = ({ comment }: Props) => {
         </time>
       </header>
       <p className="mt-2 text-sm">{comment.body}</p>
-      {hasRole('moderator') && (
+      {hasRole(['moderator', 'admin']) && (
         <button
           type="button"
           onClick={moderate}

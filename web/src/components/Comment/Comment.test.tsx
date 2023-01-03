@@ -34,7 +34,19 @@ describe('Comment', () => {
     mockCurrentUser({
       id: 1,
       email: 'moderator@moderator.com',
-      roles: 'moderator',
+      roles: ['moderator'],
+    })
+
+    render(<Comment comment={COMMENT} />)
+
+    await waitFor(() => expect(screen.getByText('Delete')).toBeInTheDocument())
+  })
+
+  it('renders a delete button if the user is an admin', async () => {
+    mockCurrentUser({
+      id: 1,
+      email: 'admin@admin.com',
+      roles: ['admin'],
     })
 
     render(<Comment comment={COMMENT} />)
