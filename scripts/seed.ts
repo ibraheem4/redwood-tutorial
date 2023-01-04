@@ -71,6 +71,34 @@ export default async () => {
         console.log(record)
       })
     )
+
+    const contactData: Prisma.ContactCreateArgs['data'][] = [
+      {
+        id: 1,
+        name: 'Mario Mario',
+        email: 'mario@mariobros.com',
+        message: 'Mamma mia!',
+      },
+      {
+        id: 2,
+        name: 'Luigi Mario',
+        email: 'luigi@mariobros.com',
+        message: 'Okey-dokey!',
+      },
+      {
+        id: 3,
+        name: 'Yoshi',
+        email: 'yoshi@mariobros.com',
+        message: 'Alright!',
+      },
+    ]
+
+    Promise.all(
+      contactData.map(async (data: Prisma.ContactCreateArgs['data']) => {
+        const record = await db.contact.create({ data })
+        console.log(record)
+      })
+    )
   } catch (error) {
     console.warn('Please define your seed data.')
     console.error(error)
