@@ -16,7 +16,7 @@ export default async () => {
         roles: ['admin'],
       },
       {
-        id: 1,
+        id: 2,
         name: 'Moderator User',
         email: 'moderator@moderator.com',
         hashedPassword:
