@@ -14,6 +14,34 @@ export default async () => {
         resetToken: null,
         resetTokenExpiresAt: null,
         roles: ['admin'],
+        posts: {
+          create: [
+            {
+              title: 'Welcome to the blog!',
+              body: "I'm baby single- origin coffee kickstarter lo - fi paleo skateboard.Tumblr hashtag austin whatever DIY plaid knausgaard fanny pack messenger bag blog next level woke.Ethical bitters fixie freegan,helvetica pitchfork 90's tbh chillwave mustache godard subway tile ramps art party. Hammock sustainable twee yr bushwick disrupt unicorn, before they sold out direct trade chicharrones etsy polaroid hoodie. Gentrify offal hoodie fingerstache.",
+              comments: {
+                create: [
+                  {
+                    name: 'Mario Mario',
+                    body: 'Mamma mia!',
+                  },
+                  {
+                    name: 'Luigi Mario',
+                    body: 'Okey-dokey!',
+                  },
+                  {
+                    name: 'Yoshi',
+                    body: 'Alright!',
+                  },
+                ],
+              },
+            },
+            {
+              title: 'A little more about me',
+              body: "Raclette shoreditch before they sold out lyft. Ethical bicycle rights meh prism twee. Tote bag ennui vice, slow-carb taiyaki crucifix whatever you probably haven't heard of them jianbing raw denim DIY hot chicken. Chillwave blog succulents freegan synth af ramps poutine wayfarers yr seitan roof party squid. Jianbing flexitarian gentrify hexagon portland single-origin coffee raclette gluten-free. Coloring book cloud bread street art kitsch lumbersexual af distillery ethical ugh thundercats roof party poke chillwave. 90's palo santo green juice subway tile, prism viral butcher selvage etsy pitchfork sriracha tumeric bushwick.",
+            },
+          ],
+        },
       },
       {
         id: 2,
@@ -25,6 +53,34 @@ export default async () => {
         resetToken: null,
         resetTokenExpiresAt: null,
         roles: ['moderator'],
+        posts: {
+          create: [
+            {
+              title: 'Welcome to the blog!',
+              body: "I'm baby single- origin coffee kickstarter lo - fi paleo skateboard.Tumblr hashtag austin whatever DIY plaid knausgaard fanny pack messenger bag blog next level woke.Ethical bitters fixie freegan,helvetica pitchfork 90's tbh chillwave mustache godard subway tile ramps art party. Hammock sustainable twee yr bushwick disrupt unicorn, before they sold out direct trade chicharrones etsy polaroid hoodie. Gentrify offal hoodie fingerstache.",
+              comments: {
+                create: [
+                  {
+                    name: 'Mario Mario',
+                    body: 'Mamma mia!',
+                  },
+                  {
+                    name: 'Luigi Mario',
+                    body: 'Okey-dokey!',
+                  },
+                  {
+                    name: 'Yoshi',
+                    body: 'Alright!',
+                  },
+                ],
+              },
+            },
+            {
+              title: 'A little more about me',
+              body: "Raclette shoreditch before they sold out lyft. Ethical bicycle rights meh prism twee. Tote bag ennui vice, slow-carb taiyaki crucifix whatever you probably haven't heard of them jianbing raw denim DIY hot chicken. Chillwave blog succulents freegan synth af ramps poutine wayfarers yr seitan roof party squid. Jianbing flexitarian gentrify hexagon portland single-origin coffee raclette gluten-free. Coloring book cloud bread street art kitsch lumbersexual af distillery ethical ugh thundercats roof party poke chillwave. 90's palo santo green juice subway tile, prism viral butcher selvage etsy pitchfork sriracha tumeric bushwick.",
+            },
+          ],
+        },
       },
     ]
 
@@ -40,37 +96,22 @@ export default async () => {
     console.info('')
     console.info('  Seeded admin user:')
     console.info('')
-    console.info('    Name: John Doe')
+    console.info('    Name: Admin User')
     console.info('    Email: admin@admin.com')
     console.info('    Password: AdminPassword')
     console.info('')
     console.info(`  (Please don't use this login in a production environment)`)
     console.info('')
 
-    const postData: Prisma.PostCreateArgs['data'][] = [
-      {
-        id: 1,
-        title: 'Welcome to the blog!',
-        body: "I'm baby single- origin coffee kickstarter lo - fi paleo skateboard.Tumblr hashtag austin whatever DIY plaid knausgaard fanny pack messenger bag blog next level woke.Ethical bitters fixie freegan,helvetica pitchfork 90's tbh chillwave mustache godard subway tile ramps art party. Hammock sustainable twee yr bushwick disrupt unicorn, before they sold out direct trade chicharrones etsy polaroid hoodie. Gentrify offal hoodie fingerstache.",
-      },
-      {
-        id: 2,
-        title: 'A little more about me',
-        body: "Raclette shoreditch before they sold out lyft. Ethical bicycle rights meh prism twee. Tote bag ennui vice, slow-carb taiyaki crucifix whatever you probably haven't heard of them jianbing raw denim DIY hot chicken. Chillwave blog succulents freegan synth af ramps poutine wayfarers yr seitan roof party squid. Jianbing flexitarian gentrify hexagon portland single-origin coffee raclette gluten-free. Coloring book cloud bread street art kitsch lumbersexual af distillery ethical ugh thundercats roof party poke chillwave. 90's palo santo green juice subway tile, prism viral butcher selvage etsy pitchfork sriracha tumeric bushwick.",
-      },
-      {
-        id: 3,
-        title: 'What is the meaning of life?',
-        body: 'Meh waistcoat succulents umami asymmetrical, hoodie post-ironic paleo chillwave tote bag. Trust fund kitsch waistcoat vape, cray offal gochujang food truck cloud bread enamel pin forage. Roof party chambray ugh occupy fam stumptown. Dreamcatcher tousled snackwave, typewriter lyft unicorn pabst portland blue bottle locavore squid PBR&B tattooed.',
-      },
-    ]
-
-    Promise.all(
-      postData.map(async (data: Prisma.PostCreateArgs['data']) => {
-        const record = await db.post.create({ data })
-        console.log(record)
-      })
-    )
+    console.info('')
+    console.info('  Seeded moderator user:')
+    console.info('')
+    console.info('    Name: Moderator User')
+    console.info('    Email: moderator@moderator.com')
+    console.info('    Password: ModeratorPassword')
+    console.info('')
+    console.info(`  (Please don't use this login in a production environment)`)
+    console.info('')
 
     const contactData: Prisma.ContactCreateArgs['data'][] = [
       {
