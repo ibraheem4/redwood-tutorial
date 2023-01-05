@@ -10,6 +10,13 @@ export const standard = defineScenario<Prisma.CommentCreateArgs>({
           create: {
             title: 'Redwood Leaves',
             body: 'The quick brown fox jumped over the lazy dog.',
+            user: {
+              create: {
+                email: 'one@one.com',
+                hashedPassword: 'String',
+                salt: 'String',
+              },
+            },
           },
         },
       },
@@ -22,6 +29,13 @@ export const standard = defineScenario<Prisma.CommentCreateArgs>({
           create: {
             title: 'Root Systems',
             body: 'The five boxing wizards jump quickly.',
+            user: {
+              create: {
+                email: 'two@two.com',
+                hashedPassword: 'String',
+                salt: 'String',
+              },
+            },
           },
         },
       },
@@ -35,6 +49,13 @@ export const postOnly = defineScenario<Prisma.PostCreateArgs>({
       data: {
         title: 'Bark',
         body: "A tree's bark is worse than its bite",
+        user: {
+          create: {
+            email: 'three@three.com',
+            hashedPassword: 'String',
+            salt: 'String',
+          },
+        },
       },
     },
   },

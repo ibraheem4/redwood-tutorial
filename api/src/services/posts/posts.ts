@@ -30,3 +30,7 @@ export const deletePost: MutationResolvers['deletePost'] = ({ id }) => {
     where: { id },
   })
 }
+
+export const Post = {
+  user: (_obj, { root }) => db.user.findFirst({ where: { id: root.userId } }),
+}
