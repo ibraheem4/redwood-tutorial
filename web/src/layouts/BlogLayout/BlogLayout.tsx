@@ -3,7 +3,32 @@ import { Link, routes } from '@redwoodjs/router'
 import { Toaster } from '@redwoodjs/web/toast'
 
 const BlogLayout = ({ children }) => {
-  const { logOut, isAuthenticated, currentUser } = useAuth()
+  const { logOut, isAuthenticated, currentUser, loading } = useAuth()
+
+  const displayCurrentUser = () => {
+    if (loading) {
+      return null
+    }
+
+    if (!isAuthenticated) {
+      return (
+        <Link to={routes.login()} className="px-4 py-2">
+          Login
+        </Link>
+      )
+    }
+
+    return (
+      <>
+        <button type="button" onClick={logOut} className="px-4 py-2">
+          Logout
+        </button>
+        <div className="right-0 bottom-1 mr-12 text-xs text-blue-300">
+          <span>Logged in as {currentUser.email}</span>{' '}
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -35,25 +60,8 @@ const BlogLayout = ({ children }) => {
                 Contact
               </Link>
             </li>
-            <li>
-              {isAuthenticated ? (
-                <div>
-                  <button type="button" onClick={logOut} className="px-4 py-2">
-                    Logout
-                  </button>
-                </div>
-              ) : (
-                <Link to={routes.login()} className="px-4 py-2">
-                  Login
-                </Link>
-              )}
-            </li>
+            {displayCurrentUser()}
           </ul>
-          {isAuthenticated && (
-            <div className="absolute right-0 bottom-1 mr-12 text-xs text-blue-300">
-              Logged in as {currentUser.email}
-            </div>
-          )}
         </nav>
       </header>
       <main className="mx-auto max-w-4xl rounded-b bg-white p-12 shadow">

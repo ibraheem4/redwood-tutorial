@@ -4,7 +4,7 @@ import { posts, post, createPost, updatePost, deletePost } from './posts'
 import type { StandardScenario } from './posts.scenarios'
 
 // Generated boilerplate tests do not account for all circumstances
-// and can fail without adjustments, e.g. Float.
+// and can fail without adjustments, e.g. Float and DateTime types.
 //           Please refer to the RedwoodJS Testing Docs:
 //       https://redwoodjs.com/docs/testing#testing-services
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
@@ -22,27 +22,32 @@ describe('posts', () => {
     expect(result).toEqual(scenario.post.one)
   })
 
-  scenario('creates a post', async (scenario: StandardScenario) => {
+  scenario('creates a post', async () => {
+    mockCurrentUser({
+      roles: ['admin'],
+      id: 1,
+      email: 'admin@admin.com',
+    })
+
     const result = await createPost({
       input: {
         title: 'String',
         body: 'String',
-        userId: scenario.post.two.userId,
       },
     })
 
-    expect(result.title).toEqual('String')
     expect(result.body).toEqual('String')
+    expect(result.title).toEqual('String')
   })
 
   scenario('updates a post', async (scenario: StandardScenario) => {
     const original = (await post({ id: scenario.post.one.id })) as Post
     const result = await updatePost({
       id: original.id,
-      input: { title: 'String2' },
+      input: { body: 'String2' },
     })
 
-    expect(result.title).toEqual('String2')
+    expect(result.body).toEqual('String2')
   })
 
   scenario('deletes a post', async (scenario: StandardScenario) => {

@@ -9,6 +9,31 @@ const ARTICLE = {
   title: 'First post',
   body: `Neutra tacos hot chicken prism raw denim, put a bird on it enamel pin post-ironic vape cred DIY. Street art next level umami squid. Hammock hexagon glossier 8-bit banjo. Neutra la croix mixtape echo park four loko semiotics kitsch forage chambray. Semiotics salvia selfies jianbing hella shaman. Letterpress helvetica vaporware cronut, shaman butcher YOLO poke fixie hoodie gentrify woke heirloom.`,
   createdAt: new Date().toISOString(),
+  user: {
+    id: 1,
+    name: 'String',
+    email: 'String',
+    hashedPassword: 'String',
+    salt: 'String',
+    roles: ['moderator'],
+    posts: [
+      {
+        id: 2,
+        title: 'Second post',
+        body: `Neutra tacos hot chicken prism raw denim, put a bird on it enamel pin post-ironic vape cred DIY. Street art next level umami squid. Hammock hexagon glossier 8-bit banjo. Neutra la croix mixtape echo park four loko semiotics kitsch forage chambray. Semiotics salvia selfies jianbing hella shaman. Letterpress helvetica vaporware cronut, shaman butcher YOLO poke fixie hoodie gentrify woke heirloom.`,
+        createdAt: new Date().toISOString(),
+        user: {
+          id: 2,
+          name: 'String',
+          email: 'String',
+          hashedPassword: 'String',
+          salt: 'String',
+          roles: ['moderator'],
+          posts: [],
+        },
+      },
+    ],
+  },
 }
 
 describe('Article', () => {

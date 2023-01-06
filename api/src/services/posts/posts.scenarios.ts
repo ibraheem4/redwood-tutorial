@@ -1,8 +1,4 @@
-import type { Prisma, Post } from '@prisma/client'
-
-import type { ScenarioData } from '@redwoodjs/testing/api'
-
-export const standard = defineScenario<Prisma.PostCreateArgs>({
+export const standard = defineScenario({
   post: {
     one: {
       data: {
@@ -10,9 +6,12 @@ export const standard = defineScenario<Prisma.PostCreateArgs>({
         body: 'String',
         user: {
           create: {
-            email: 'one@one.com',
+            id: 1,
+            name: 'String',
+            email: 'mock+test1@email.com',
             hashedPassword: 'String',
             salt: 'String',
+            roles: ['String'],
           },
         },
       },
@@ -23,14 +22,15 @@ export const standard = defineScenario<Prisma.PostCreateArgs>({
         body: 'String',
         user: {
           create: {
-            email: 'two@two.com',
+            id: 2,
+            name: 'String',
+            email: 'mock+test2@email.com',
             hashedPassword: 'String',
             salt: 'String',
+            roles: ['String'],
           },
         },
       },
     },
   },
 })
-
-export type StandardScenario = ScenarioData<Post, 'post'>
