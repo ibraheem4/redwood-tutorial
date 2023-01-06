@@ -24,7 +24,7 @@ interface Props {
 }
 
 const Comment = ({ comment }: Props) => {
-  const { hasRole } = useAuth()
+  const { hasRole, loading } = useAuth()
   const [deleteComment] = useMutation(DELETE, {
     refetchQueries: [
       {
@@ -42,6 +42,26 @@ const Comment = ({ comment }: Props) => {
     }
   }
 
+  const displayDeleteButton = () => {
+    if (loading) {
+      return null
+    }
+
+    if (hasRole(['moderator', 'admin'])) {
+      return (
+        <button
+          type="button"
+          onClick={moderate}
+          className="absolute bottom-2 right-2 rounded bg-red-500 px-2 py-1 text-xs text-white"
+        >
+          Delete
+        </button>
+      )
+    }
+
+    return <></>
+  }
+
   return (
     <div className="relative rounded-lg bg-gray-200 p-8">
       <header className="flex justify-between">
@@ -51,15 +71,7 @@ const Comment = ({ comment }: Props) => {
         </time>
       </header>
       <p className="mt-2 text-sm">{comment.body}</p>
-      {hasRole(['moderator', 'admin']) && (
-        <button
-          type="button"
-          onClick={moderate}
-          className="absolute bottom-2 right-2 rounded bg-red-500 px-2 py-1 text-xs text-white"
-        >
-          Delete
-        </button>
-      )}
+      {displayDeleteButton()}
     </div>
   )
 }

@@ -16,7 +16,7 @@ describe('requireAuth directive', () => {
         currentUser: {
           id: 1,
           email: 'bob@mcbobface.com',
-          roles: ['moderator'],
+          roles: ['String'],
         },
       },
     })

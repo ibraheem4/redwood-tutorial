@@ -28,7 +28,7 @@ describe('users', () => {
         email: 'String4395546',
         hashedPassword: 'String',
         salt: 'String',
-        roles: ['moderator'],
+        roles: ['String'],
       },
     })
 

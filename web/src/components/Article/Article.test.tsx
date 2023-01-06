@@ -15,7 +15,7 @@ const ARTICLE = {
     email: 'String',
     hashedPassword: 'String',
     salt: 'String',
-    roles: ['moderator'],
+    roles: ['String'],
     posts: [
       {
         id: 2,
@@ -28,7 +28,7 @@ const ARTICLE = {
           email: 'String',
           hashedPassword: 'String',
           salt: 'String',
-          roles: ['moderator'],
+          roles: ['String'],
           posts: [],
         },
       },
