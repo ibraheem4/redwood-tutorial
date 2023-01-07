@@ -19,7 +19,7 @@ model Post {
 }
 
 model Contact {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid()) @db.Uuid
   name      String
   email     String
   message   String

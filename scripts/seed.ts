@@ -1,5 +1,6 @@
 import type { Prisma } from '@prisma/client'
 import { db } from 'api/src/lib/db'
+import { v4 as uuidV4 } from 'uuid'
 
 export default async () => {
   try {
@@ -115,19 +116,19 @@ export default async () => {
 
     const contactData: Prisma.ContactCreateArgs['data'][] = [
       {
-        id: 1,
+        id: uuidV4(),
         name: 'Mario Mario',
         email: 'mario@mariobros.com',
         message: 'Mamma mia!',
       },
       {
-        id: 2,
+        id: uuidV4(),
         name: 'Luigi Mario',
         email: 'luigi@mariobros.com',
         message: 'Okey-dokey!',
       },
       {
-        id: 3,
+        id: uuidV4(),
         name: 'Yoshi',
         email: 'yoshi@mariobros.com',
         message: 'Alright!',

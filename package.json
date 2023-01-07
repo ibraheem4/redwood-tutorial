@@ -33,5 +33,8 @@
   "scripts": {
     "prepare": "husky install",
     "postinstall": "husky install"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
   }
 }
