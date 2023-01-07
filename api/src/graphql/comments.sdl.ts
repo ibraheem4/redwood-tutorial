@@ -1,32 +1,32 @@
 export const schema = gql`
   type Comment {
-    id: Int!
+    id: String!
     name: String!
     body: String!
     post: Post!
-    postId: Int!
+    postId: String!
     createdAt: DateTime!
   }
 
   type Query {
-    comments(postId: Int!): [Comment!]! @skipAuth
+    comments(postId: String!): [Comment!]! @skipAuth
   }
 
   input CreateCommentInput {
     name: String!
     body: String!
-    postId: Int!
+    postId: String!
   }
 
   input UpdateCommentInput {
     name: String
     body: String
-    postId: Int
+    postId: String
   }
 
   type Mutation {
     createComment(input: CreateCommentInput!): Comment! @skipAuth
-    deleteComment(id: Int!): Comment!
+    deleteComment(id: String!): Comment!
       @requireAuth(roles: ["moderator", "admin"])
   }
 `

@@ -10,7 +10,7 @@ export const standard = defineScenario<Prisma.PostCreateArgs>({
         body: 'String',
         user: {
           create: {
-            id: 1,
+            id: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
             name: 'String',
             email: 'mock+test1@email.com',
             hashedPassword: 'String',
@@ -26,7 +26,7 @@ export const standard = defineScenario<Prisma.PostCreateArgs>({
         body: 'String',
         user: {
           create: {
-            id: 2,
+            id: '5e1923f3-e84c-4603-90a6-18302f95a6f7',
             name: 'String',
             email: 'mock+test2@email.com',
             hashedPassword: 'String',

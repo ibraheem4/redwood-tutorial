@@ -1,6 +1,6 @@
 export const schema = gql`
   type Contact {
-    id: Int!
+    id: String!
     name: String!
     email: String!
     message: String!
@@ -9,7 +9,7 @@ export const schema = gql`
 
   type Query {
     contacts: [Contact!]! @requireAuth
-    contact(id: Int!): Contact @requireAuth
+    contact(id: String!): Contact @requireAuth
   }
 
   input CreateContactInput {

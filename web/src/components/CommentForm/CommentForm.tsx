@@ -31,7 +31,7 @@ interface FormValues {
 }
 
 interface Props {
-  postId: number
+  postId: string
 }
 
 const CommentForm = ({ postId }: Props) => {

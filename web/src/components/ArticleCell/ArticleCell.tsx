@@ -5,7 +5,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import Article from 'src/components/Article'
 
 export const QUERY = gql`
-  query ArticleQuery($id: Int!) {
+  query ArticleQuery($id: String!) {
     article: post(id: $id) {
       id
       title

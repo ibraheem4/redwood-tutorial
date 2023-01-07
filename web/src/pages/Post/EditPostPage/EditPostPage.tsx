@@ -1,7 +1,7 @@
 import EditPostCell from 'src/components/Post/EditPostCell'
 
 type PostPageProps = {
-  id: number
+  id: string
 }
 
 const EditPostPage = ({ id }: PostPageProps) => {

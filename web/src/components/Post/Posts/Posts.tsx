@@ -8,7 +8,7 @@ import { QUERY } from 'src/components/Post/PostsCell'
 import { timeTag, truncate } from 'src/lib/formatters'
 
 const DELETE_POST_MUTATION = gql`
-  mutation DeletePostMutation($id: Int!) {
+  mutation DeletePostMutation($id: String!) {
     deletePost(id: $id) {
       id
     }

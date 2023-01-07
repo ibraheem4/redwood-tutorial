@@ -7,7 +7,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { timeTag } from 'src/lib/formatters'
 
 const DELETE_POST_MUTATION = gql`
-  mutation DeletePostMutation($id: Int!) {
+  mutation DeletePostMutation($id: String!) {
     deletePost(id: $id) {
       id
     }

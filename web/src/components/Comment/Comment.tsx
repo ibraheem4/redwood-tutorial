@@ -6,7 +6,7 @@ import { useMutation } from '@redwoodjs/web'
 import { QUERY as CommentsQuery } from 'src/components/CommentsCell'
 
 const DELETE = gql`
-  mutation DeleteCommentMutation($id: Int!) {
+  mutation DeleteCommentMutation($id: String!) {
     deleteComment(id: $id) {
       postId
     }

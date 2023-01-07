@@ -19,11 +19,11 @@ export const defaultView = () => {
   return (
     <Comment
       comment={{
-        id: 1,
+        id: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
         name: 'Rob Cameron',
         body: 'This is the first comment!',
         createdAt: '2020-01-01T12:34:56Z',
-        postId: 1,
+        postId: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
       }}
     />
   )
@@ -31,7 +31,7 @@ export const defaultView = () => {
 
 export const moderatorView = () => {
   mockCurrentUser({
-    id: 1,
+    id: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
     email: 'moderator@moderator.com',
     roles: ['moderator'],
   })
@@ -39,11 +39,11 @@ export const moderatorView = () => {
   return (
     <Comment
       comment={{
-        id: 1,
+        id: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
         name: 'Rob Cameron',
         body: 'This is the first comment!',
         createdAt: '2020-01-01T12:34:56Z',
-        postId: 1,
+        postId: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
       }}
     />
   )
@@ -51,7 +51,7 @@ export const moderatorView = () => {
 
 export const adminView = () => {
   mockCurrentUser({
-    id: 1,
+    id: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
     email: 'admin@admin.com',
     roles: ['admin'],
   })
@@ -59,11 +59,11 @@ export const adminView = () => {
   return (
     <Comment
       comment={{
-        id: 1,
+        id: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
         name: 'Rob Cameron',
         body: 'This is the first comment!',
         createdAt: '2020-01-01T12:34:56Z',
-        postId: 1,
+        postId: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
       }}
     />
   )

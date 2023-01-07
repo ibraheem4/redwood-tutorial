@@ -3,11 +3,11 @@ import { render, screen, waitFor } from '@redwoodjs/testing'
 import Comment from './Comment'
 
 const COMMENT = {
-  id: 1,
+  id: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
   name: 'John Doe',
   body: 'This is my comment',
   createdAt: '2020-01-02T12:34:56Z',
-  postId: 1,
+  postId: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
 }
 
 describe('Comment', () => {
@@ -32,7 +32,7 @@ describe('Comment', () => {
 
   it('renders a delete button if the user is a moderator', async () => {
     mockCurrentUser({
-      id: 1,
+      id: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
       email: 'moderator@moderator.com',
       roles: ['moderator'],
     })
@@ -44,7 +44,7 @@ describe('Comment', () => {
 
   it('renders a delete button if the user is an admin', async () => {
     mockCurrentUser({
-      id: 1,
+      id: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
       email: 'admin@admin.com',
       roles: ['admin'],
     })

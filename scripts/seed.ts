@@ -1,12 +1,10 @@
 import type { Prisma } from '@prisma/client'
 import { db } from 'api/src/lib/db'
-import { v4 as uuidV4 } from 'uuid'
 
 export default async () => {
   try {
     const userData: Prisma.UserCreateArgs['data'][] = [
       {
-        id: 1,
         name: 'Admin User',
         email: 'admin@admin.com',
         hashedPassword:
@@ -45,7 +43,6 @@ export default async () => {
         },
       },
       {
-        id: 2,
         name: 'Moderator User',
         email: 'moderator@moderator.com',
         hashedPassword:
@@ -116,19 +113,16 @@ export default async () => {
 
     const contactData: Prisma.ContactCreateArgs['data'][] = [
       {
-        id: uuidV4(),
         name: 'Mario Mario',
         email: 'mario@mariobros.com',
         message: 'Mamma mia!',
       },
       {
-        id: uuidV4(),
         name: 'Luigi Mario',
         email: 'luigi@mariobros.com',
         message: 'Okey-dokey!',
       },
       {
-        id: uuidV4(),
         name: 'Yoshi',
         email: 'yoshi@mariobros.com',
         message: 'Alright!',
