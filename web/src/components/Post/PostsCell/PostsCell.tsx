@@ -7,7 +7,7 @@ import Posts from 'src/components/Post/Posts'
 
 export const QUERY = gql`
   query FindPosts {
-    posts {
+    posts: adminPosts {
       id
       title
       body

@@ -9,7 +9,7 @@ import PostForm from 'src/components/Post/PostForm'
 
 export const QUERY = gql`
   query EditPostById($id: String!) {
-    post: post(id: $id) {
+    post: adminPost(id: $id) {
       id
       title
       body

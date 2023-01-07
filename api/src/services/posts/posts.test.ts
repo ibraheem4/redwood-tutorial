@@ -1,6 +1,8 @@
 import type { Post } from '@prisma/client'
 
-import { posts, post, createPost, updatePost, deletePost } from './posts'
+import { createPost, updatePost, deletePost } from '../adminPosts/adminPosts'
+
+import { posts, post } from './posts'
 import type { StandardScenario } from './posts.scenarios'
 
 // Generated boilerplate tests do not account for all circumstances
@@ -30,10 +32,7 @@ describe('posts', () => {
     })
 
     const result = await createPost({
-      input: {
-        title: 'String',
-        body: 'String',
-      },
+      input: { title: 'String', body: 'String' },
     })
 
     expect(result.body).toEqual('String')
