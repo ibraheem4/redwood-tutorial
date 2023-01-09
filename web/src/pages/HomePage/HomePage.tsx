@@ -10,7 +10,7 @@ const HomePage = () => {
   const displayLanguageSwitcher = () => {
     return (
       <>
-        <h1>{t('HomePage.title')}</h1>
+        <h1>{t('HomePage.header')}</h1>
         <button onClick={() => i18n.changeLanguage('fr')}>fr</button>
         <button onClick={() => i18n.changeLanguage('en')}>en</button>
         <p>
@@ -26,7 +26,10 @@ const HomePage = () => {
 
   return (
     <>
-      <MetaTags title="Home" description="Home page" />
+      <MetaTags
+        title={t('HomePage.title')}
+        description={t('HomePage.header')}
+      />
       <ArticlesCell />
       {displayLanguageSwitcher()}
     </>

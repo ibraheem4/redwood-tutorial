@@ -3,7 +3,8 @@
   "info": "This is your English translation file",
   "see": "https://www.i18next.com/translation-function/essentials",
   "HomePage": {
-    "title": "Home Page",
+    "title": "Home",
+    "header": "Home Page",
     "info": "Find me in",
     "route": "My default route is named",
     "link": "link to me with"
