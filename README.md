@@ -140,3 +140,5 @@ yarn rw dev
  - Configure Netlify
  - Configure Flightcontrol
  - Setup Postgres
+ - Setup i18n including RTL support
+ - Use UUID instead of Int
