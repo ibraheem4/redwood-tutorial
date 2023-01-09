@@ -8,5 +8,9 @@
     "info": "Trouve moi dans",
     "route": "Ma route par default se nomme",
     "link": "le lien vers moi avec"
+  },
+  "languageCodes": {
+    "en": "Anglais",
+    "fr": "Francais"
   }
 }

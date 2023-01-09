@@ -7,12 +7,26 @@ import ArticlesCell from 'src/components/ArticlesCell'
 
 const HomePage = () => {
   const { t, i18n } = useTranslation()
+  const directionValue = Object.freeze(['ar']).includes(i18n.language)
+    ? 'rtl'
+    : 'ltr'
+  const changeLang = (newLang) => {
+    i18n.changeLanguage(newLang)
+    document.documentElement.setAttribute('dir', directionValue)
+    document.documentElement.lang = newLang
+  }
   const displayLanguageSwitcher = () => {
     return (
       <>
         <h1>{t('HomePage.header')}</h1>
-        <button onClick={() => i18n.changeLanguage('fr')}>fr</button>
-        <button onClick={() => i18n.changeLanguage('en')}>en</button>
+        <div>Current language: {t(`languageCodes.` + i18n.language)}</div>
+        <div>Direction value: {directionValue}</div>
+        <button onClick={() => changeLang('fr')}>
+          {t('languageCodes.fr')}
+        </button>
+        <button onClick={() => changeLang('en')}>
+          {t('languageCodes.en')}
+        </button>
         <p>
           {t('HomePage.info')} <code>./web/src/pages/HomePage/HomePage.js</code>
         </p>
@@ -29,6 +43,7 @@ const HomePage = () => {
       <MetaTags
         title={t('HomePage.title')}
         description={t('HomePage.header')}
+        locale={i18n.language}
       />
       <ArticlesCell />
       {displayLanguageSwitcher()}
