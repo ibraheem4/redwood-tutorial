@@ -1,0 +1,17 @@
+{
+  "Welcome to RedwoodJS": "مرحبًا بكم في RedwoodJS",
+  "info": "هذا هو ملف الترجمة العربي الخاص بك",
+  "see": "https://www.i18next.com/translation-function/essentials",
+  "HomePage": {
+    "title": "مسكن",
+    "header": "الصفحة الرئيسية",
+    "info": "تجدني في",
+    "route": "تم تسمية طريقي الافتراضي",
+    "link": "ربط لي مع"
+  },
+  "languageCodes": {
+    "en": "Anglais",
+    "fr": "Francais",
+    "ar": "العربية"
+  }
+}

@@ -21,6 +21,11 @@ export const globalTypes = {
           right: '🇫🇷',
           title: 'Français',
         },
+        {
+          value: 'ar',
+          right: '🇸🇦',
+          title: 'عربي',
+        },
       ],
     },
   },

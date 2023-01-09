@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { useTranslation } from 'react-i18next'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -15,6 +17,10 @@ const HomePage = () => {
     document.documentElement.setAttribute('dir', directionValue)
     document.documentElement.lang = newLang
   }
+  useEffect(() => {
+    document.documentElement.setAttribute('dir', directionValue)
+    document.documentElement.lang = i18n.language
+  })
   const displayLanguageSwitcher = () => {
     return (
       <>
@@ -26,6 +32,9 @@ const HomePage = () => {
         </button>
         <button onClick={() => changeLang('en')}>
           {t('languageCodes.en')}
+        </button>
+        <button onClick={() => changeLang('ar')}>
+          {t('languageCodes.ar')}
         </button>
         <p>
           {t('HomePage.info')} <code>./web/src/pages/HomePage/HomePage.js</code>
