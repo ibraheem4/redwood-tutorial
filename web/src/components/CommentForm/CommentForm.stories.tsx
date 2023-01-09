@@ -13,7 +13,7 @@ export const generated = () => {
   mockGraphQLMutation<CreateCommentMutation, CreateCommentMutationVariables>(
     'CreateCommentMutation',
     (variables, { ctx }) => {
-      const id = Math.floor(Math.random() * 1000)
+      const id = '5e1923f3-e84c-4603-90a6-18302f95a6f9'
       ctx.delay(1000)
 
       return {
