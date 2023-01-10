@@ -56,7 +56,9 @@ const withI18n = (StoryFn, context) => {
   }, [context.globals.locale])
   return (
     <I18nextProvider i18n={i18n}>
-      <StoryFn />
+      <div style={{ margin: '48px' }}>
+        <StoryFn />
+      </div>
     </I18nextProvider>
   )
 }
