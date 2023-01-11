@@ -134,6 +134,7 @@ yarn rw dev
 
 ## Enhancements
 
+ - Use TypeScript
  - Pre-commit lint
  - Pre-push test
  - Add commitlint
