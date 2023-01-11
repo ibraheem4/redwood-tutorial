@@ -79,6 +79,7 @@ Mockup, build, and verify your React components, even in complete isolation from
 
 ```
 yarn rw storybook
+yarn storybook (supports dark mode)
 ```
 
 Before you start, see if the CLI's `setup ui` command has your favorite styling library:
@@ -142,3 +143,5 @@ yarn rw dev
  - Setup Postgres
  - Setup i18n including RTL support
  - Use UUID instead of Int
+ - Add i18n support for Storybook
+ - Add Dark mode support for Storybook

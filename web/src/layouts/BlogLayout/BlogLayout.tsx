@@ -33,7 +33,7 @@ const BlogLayout = ({ children }) => {
   return (
     <>
       <Toaster />
-      <header className="relative flex items-center justify-between bg-blue-700 px-8 py-4 text-white">
+      <header className="relative flex items-center justify-between bg-blue-700 px-8 py-4 text-white dark:bg-black">
         <h1 className="text-5xl font-semibold tracking-tight">
           <Link
             className="text-blue-400 transition duration-100 hover:text-blue-100"
