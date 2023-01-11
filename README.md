@@ -146,3 +146,4 @@ yarn rw dev
  - Use UUID instead of Int
  - Add i18n support for Storybook
  - Add Dark mode support for Storybook
+ - Add padding in Storybook
