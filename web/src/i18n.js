@@ -2,9 +2,17 @@ import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
-import ar from './locales/ar.json'
-import en from './locales/en.json'
-import fr from './locales/fr.json'
+import translationAR from './locales/ar.json'
+import translationEN from './locales/en.json'
+import translationFR from './locales/fr.json'
+
+const resources = {
+  ar: translationAR,
+  en: translationEN,
+  'en-US': translationEN,
+  fr: translationFR,
+  'fr-FR': translationFR,
+}
 
 i18n
   // learn more: https://github.com/i18next/i18next-browser-languageDetector
@@ -12,17 +20,7 @@ i18n
   .use(initReactI18next)
   .init({
     interpolation: { escapeValue: false }, // React already does escaping
-    fallbackLng: 'en',
-    resources: {
-      en: {
-        translation: en,
-      },
-      fr: {
-        translation: fr,
-      },
-      ar: {
-        translation: ar,
-      },
-    },
+    fallbackLng: 'en-US',
+    resources: resources,
   })
 export default i18n
