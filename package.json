@@ -32,7 +32,13 @@
     "(web|api)/src/**/*.{js,jsx,ts,tsx}": "yarn rw lint --fix"
   },
   "scripts": {
+    "lint": "yarn rw lint",
+    "lint:fix": "yarn rw lint --fix",
     "prepare": "husky install",
+    "start": "yarn rw dev",
+    "test": "yarn rw test --no-watch",
+    "test:coverage": "yarn rw test --collect-coverage",
+    "test:watch": "yarn rw test",
     "postinstall": "husky install",
     "storybook": "IS_STORYBOOK=true yarn rw storybook"
   }
