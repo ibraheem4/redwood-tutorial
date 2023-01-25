@@ -9383,6 +9383,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chance@npm:^1.1.9":
+  version: 1.1.9
+  resolution: "chance@npm:1.1.9"
+  checksum: 8f9c1e78df5d5a67d8f37cd1f32fd05c56add49d1ea478d37287cf740b3ee24eabfc10c3278af7935ab26162c80fa4490198dc540877dc46a886dc677cdfbd3a
+  languageName: node
+  linkType: hard
+
 "change-case-all@npm:1.0.14":
   version: 1.0.14
   resolution: "change-case-all@npm:1.0.14"
@@ -21330,6 +21337,7 @@ __metadata:
     "@commitlint/cli": ^17.3.0
     "@commitlint/config-conventional": ^17.3.0
     "@redwoodjs/core": 3.8.0
+    chance: ^1.1.9
     husky: ^8.0.2
     lint-staged: ">=10"
     prettier-plugin-tailwindcss: ^0.2.1
