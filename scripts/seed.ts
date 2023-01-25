@@ -1,15 +1,21 @@
 import type { Prisma } from '@prisma/client'
 import { db } from 'api/src/lib/db'
+import CryptoJS from 'crypto-js'
+
+const ADMIN_PASSWORD = 'AdminPassword'
+const MODERATOR_PASSWORD = 'ModeratorPassword'
 
 export default async () => {
   try {
+    const [hashedPasswordAdmin, saltAdmin] = _hashPassword(ADMIN_PASSWORD)
+    const [hashedPasswordModerator, saltModerator] =
+      _hashPassword(MODERATOR_PASSWORD)
     const userData: Prisma.UserCreateArgs['data'][] = [
       {
         name: 'Admin User',
         email: 'admin@admin.com',
-        hashedPassword:
-          '9e2038890dd6370bed2e80b0ee17109876a5f94b76c2baaf83c5225bc559df54',
-        salt: 'a271de3ce442031a61bf70166644437b',
+        hashedPassword: hashedPasswordAdmin,
+        salt: saltAdmin,
         resetToken: null,
         resetTokenExpiresAt: null,
         roles: ['admin'],
@@ -45,9 +51,8 @@ export default async () => {
       {
         name: 'Moderator User',
         email: 'moderator@moderator.com',
-        hashedPassword:
-          '830a417c433c10e98b576fcf833a09a1095b05456138947286a1b459ed0cc136',
-        salt: '1714d1a0952fdb253ea3e045fb8d2147',
+        hashedPassword: hashedPasswordModerator,
+        salt: saltModerator,
         resetToken: null,
         resetTokenExpiresAt: null,
         roles: ['moderator'],
@@ -96,7 +101,7 @@ export default async () => {
     console.info('')
     console.info('    Name: Admin User')
     console.info('    Email: admin@admin.com')
-    console.info('    Password: AdminPassword')
+    console.info(`    Password: ${ADMIN_PASSWORD}`)
     console.info('')
     console.info(`  (Please don't use this login in a production environment)`)
     console.info('')
@@ -105,7 +110,7 @@ export default async () => {
     console.info('  Seeded moderator user:')
     console.info('')
     console.info('    Name: Moderator User')
-    console.info('    Email: moderator@moderator.com')
+    console.info(`    Password: ${MODERATOR_PASSWORD}`)
     console.info('    Password: ModeratorPassword')
     console.info('')
     console.info(`  (Please don't use this login in a production environment)`)
@@ -139,4 +144,15 @@ export default async () => {
     console.warn('Please define your seed data.')
     console.error(error)
   }
+}
+
+// https://github.com/redwoodjs/redwood/issues/5793
+// https://github.com/redwoodjs/redwood/blob/main/packages/api/src/functions/dbAuth/DbAuthHandler.ts#L1288
+const _hashPassword = (text: string, salt?: string) => {
+  const useSalt = salt || CryptoJS.lib.WordArray.random(128 / 8).toString()
+
+  return [
+    CryptoJS.PBKDF2(text, useSalt, { keySize: 256 / 32 }).toString(),
+    useSalt,
+  ]
 }

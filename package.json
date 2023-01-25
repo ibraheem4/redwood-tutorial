@@ -32,6 +32,7 @@
     "(web|api)/src/**/*.{js,jsx,ts,tsx}": "yarn rw lint --fix"
   },
   "scripts": {
+    "db:reset": "yarn rw prisma migrate reset",
     "lint": "yarn rw lint",
     "lint:fix": "yarn rw lint --fix",
     "prepare": "husky install",
