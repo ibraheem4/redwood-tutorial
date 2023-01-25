@@ -1,9 +1,14 @@
 import { useAuth } from '@redwoodjs/auth'
-import { Link, routes } from '@redwoodjs/router'
+import { navigate, Link, routes } from '@redwoodjs/router'
 import { Toaster } from '@redwoodjs/web/toast'
 
 const BlogLayout = ({ children }) => {
   const { logOut, isAuthenticated, currentUser, loading } = useAuth()
+
+  const logoutHandler = () => {
+    logOut()
+    navigate(routes.home())
+  }
 
   const displayCurrentUser = () => {
     if (loading) {
@@ -20,7 +25,7 @@ const BlogLayout = ({ children }) => {
 
     return (
       <>
-        <button type="button" onClick={logOut} className="px-4 py-2">
+        <button type="button" onClick={logoutHandler} className="px-4 py-2">
           Logout
         </button>
         <div className="right-0 bottom-1 mr-12 text-xs text-blue-300">
