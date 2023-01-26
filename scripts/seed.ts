@@ -4,33 +4,59 @@ import {
   randParagraph,
   randEmail,
 } from '@ngneat/falso'
+import { PrismaClient } from '@prisma/client'
 import type { Prisma } from '@prisma/client'
 import { db } from 'api/src/lib/db'
 import CryptoJS from 'crypto-js'
 
+const prisma = new PrismaClient()
+
 const ADMIN_PASSWORD = 'AdminPassword'
 const MODERATOR_PASSWORD = 'ModeratorPassword'
+const USER_PASSWORD = 'UserPassword'
+const USER_COUNT = 50
 
-export default async () => {
-  try {
-    const users = [
-      {
-        name: 'admin',
-        email: 'admin@admin.com',
-        password: ADMIN_PASSWORD,
-        roles: ['admin'],
-      },
-      {
-        name: 'moderator',
-        email: 'moderator@moderator.com',
-        password: MODERATOR_PASSWORD,
-        roles: ['moderator'],
-      },
-    ]
+const seedUsers = async (n: number = USER_COUNT) => {
+  const [hashedPassword, salt] = _hashPassword(USER_PASSWORD)
+  const users: Prisma.UserCreateManyInput[] = Array(n)
+    .fill(null)
+    .map(() => {
+      return {
+        email: randEmail(),
+        name: randFullName(),
+        hashedPassword: hashedPassword,
+        salt: salt,
+      }
+    })
+  await prisma.user
+    .createMany({
+      skipDuplicates: true,
+      data: users,
+    })
+    .then(console.log)
+    .catch(console.error)
+}
 
-    for (const user of users) {
-      const [hashedPassword, salt] = _hashPassword(user.password)
-      await db.user.create({
+const seedAdminUsers = async () => {
+  const users = [
+    {
+      name: 'admin',
+      email: 'admin@admin.com',
+      password: ADMIN_PASSWORD,
+      roles: ['admin'],
+    },
+    {
+      name: 'moderator',
+      email: 'moderator@moderator.com',
+      password: MODERATOR_PASSWORD,
+      roles: ['moderator'],
+    },
+  ]
+
+  for (const user of users) {
+    const [hashedPassword, salt] = _hashPassword(user.password)
+    await db.user
+      .create({
         data: {
           name: user.name,
           email: user.email,
@@ -67,11 +93,15 @@ export default async () => {
           },
         },
       })
-      console.info(
-        `- Created user: ${user.name} with password: ${user.password}`
-      )
-      console.info(`- Please don't use this login in a production environment`)
-    }
+      .then(console.log)
+      .catch(console.error)
+    console.info(`- Created user: ${user.name} with password: ${user.password}`)
+    console.info(`- Please don't use this login in a production environment`)
+  }
+}
+
+export default async () => {
+  try {
     const contactData: Prisma.ContactCreateArgs['data'][] = [
       {
         name: randFullName(),
@@ -96,6 +126,9 @@ export default async () => {
         console.log(record)
       })
     )
+
+    seedAdminUsers()
+    seedUsers()
   } catch (error) {
     console.warn('Please define your seed data.')
     console.error(error)

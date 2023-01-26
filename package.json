@@ -34,6 +34,8 @@
   },
   "scripts": {
     "db:reset": "yarn rw prisma migrate reset",
+    "db:seed": "yarn rw prisma db seed",
+    "db:studio": "yarn rw prisma studio",
     "lint": "yarn rw lint",
     "lint:fix": "yarn rw lint --fix",
     "prepare": "husky install",
