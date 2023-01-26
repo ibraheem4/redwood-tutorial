@@ -17,9 +17,28 @@ const USER_PASSWORD = 'UserPassword'
 
 const USER_COUNT = 50
 const CONTACT_COUNT = 50
+const MIN_COMMENT_COUNT = 0
+const MAX_COMMENT_COUNT = 100
+const MIN_POST_COUNT = 10
+const MAX_POST_COUNT = 100
 
-const generateComments = () => {
-  const n = _randomInteger(0, 1000)
+const _generatePosts = () => {
+  const n = _randomInteger(MIN_POST_COUNT, MAX_POST_COUNT)
+  return Array(n)
+    .fill(null)
+    .map(() => {
+      return {
+        title: randSentence(),
+        body: randParagraph(),
+        comments: {
+          create: _generateComments(),
+        },
+      }
+    })
+}
+
+const _generateComments = () => {
+  const n = _randomInteger(MIN_COMMENT_COUNT, MAX_COMMENT_COUNT)
   return Array(n)
     .fill(null)
     .map(() => {
@@ -57,19 +76,7 @@ const seedAdminUsers = async () => {
           salt,
           roles: user.roles,
           posts: {
-            create: [
-              {
-                title: randSentence(),
-                body: randParagraph(),
-                comments: {
-                  create: generateComments(),
-                },
-              },
-              {
-                title: randSentence(),
-                body: randParagraph(),
-              },
-            ],
+            create: _generatePosts(),
           },
         },
       })
