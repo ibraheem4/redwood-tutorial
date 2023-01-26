@@ -14,28 +14,9 @@ const prisma = new PrismaClient()
 const ADMIN_PASSWORD = 'AdminPassword'
 const MODERATOR_PASSWORD = 'ModeratorPassword'
 const USER_PASSWORD = 'UserPassword'
-const USER_COUNT = 50
 
-const seedUsers = async (n: number = USER_COUNT) => {
-  const [hashedPassword, salt] = _hashPassword(USER_PASSWORD)
-  const users: Prisma.UserCreateManyInput[] = Array(n)
-    .fill(null)
-    .map(() => {
-      return {
-        email: randEmail(),
-        name: randFullName(),
-        hashedPassword: hashedPassword,
-        salt: salt,
-      }
-    })
-  await prisma.user
-    .createMany({
-      skipDuplicates: true,
-      data: users,
-    })
-    .then(console.log)
-    .catch(console.error)
-}
+const USER_COUNT = 50
+const CONTACT_COUNT = 50
 
 const seedAdminUsers = async () => {
   const users = [
@@ -100,35 +81,51 @@ const seedAdminUsers = async () => {
   }
 }
 
+const seedUsers = async (n: number = USER_COUNT) => {
+  const [hashedPassword, salt] = _hashPassword(USER_PASSWORD)
+  const users: Prisma.UserCreateManyInput[] = Array(n)
+    .fill(null)
+    .map(() => {
+      return {
+        email: randEmail(),
+        name: randFullName(),
+        hashedPassword: hashedPassword,
+        salt: salt,
+      }
+    })
+  await prisma.user
+    .createMany({
+      skipDuplicates: true,
+      data: users,
+    })
+    .then(console.log)
+    .catch(console.error)
+}
+
+const seedContacts = async (n: number = CONTACT_COUNT) => {
+  const contacts: Prisma.ContactCreateManyInput[] = Array(n)
+    .fill(null)
+    .map(() => {
+      return {
+        name: randFullName(),
+        email: randEmail(),
+        message: randSentence(),
+      }
+    })
+  await prisma.contact
+    .createMany({
+      skipDuplicates: true,
+      data: contacts,
+    })
+    .then(console.log)
+    .catch(console.error)
+}
+
 export default async () => {
   try {
-    const contactData: Prisma.ContactCreateArgs['data'][] = [
-      {
-        name: randFullName(),
-        email: randEmail(),
-        message: randSentence(),
-      },
-      {
-        name: randFullName(),
-        email: randEmail(),
-        message: randSentence(),
-      },
-      {
-        name: randFullName(),
-        email: randEmail(),
-        message: randSentence(),
-      },
-    ]
-
-    Promise.all(
-      contactData.map(async (data: Prisma.ContactCreateArgs['data']) => {
-        const record = await db.contact.create({ data })
-        console.log(record)
-      })
-    )
-
     seedAdminUsers()
     seedUsers()
+    seedContacts()
   } catch (error) {
     console.warn('Please define your seed data.')
     console.error(error)
