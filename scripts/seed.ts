@@ -1,12 +1,15 @@
+import {
+  randSentence,
+  randFullName,
+  randParagraph,
+  randEmail,
+} from '@ngneat/falso'
 import type { Prisma } from '@prisma/client'
 import { db } from 'api/src/lib/db'
-import Chance from 'chance'
 import CryptoJS from 'crypto-js'
 
 const ADMIN_PASSWORD = 'AdminPassword'
 const MODERATOR_PASSWORD = 'ModeratorPassword'
-
-const chance = new Chance()
 
 export default async () => {
   try {
@@ -37,28 +40,28 @@ export default async () => {
           posts: {
             create: [
               {
-                title: chance.sentence(),
-                body: chance.paragraph(),
+                title: randSentence(),
+                body: randParagraph(),
                 comments: {
                   create: [
                     {
-                      name: chance.name(),
-                      body: chance.sentence(),
+                      name: randFullName(),
+                      body: randSentence(),
                     },
                     {
-                      name: chance.name(),
-                      body: chance.sentence(),
+                      name: randFullName(),
+                      body: randSentence(),
                     },
                     {
-                      name: chance.name(),
-                      body: chance.sentence(),
+                      name: randFullName(),
+                      body: randSentence(),
                     },
                   ],
                 },
               },
               {
-                title: chance.sentence(),
-                body: chance.paragraph(),
+                title: randSentence(),
+                body: randParagraph(),
               },
             ],
           },
@@ -71,19 +74,19 @@ export default async () => {
     }
     const contactData: Prisma.ContactCreateArgs['data'][] = [
       {
-        name: chance.name(),
-        email: chance.email(),
-        message: chance.sentence(),
+        name: randFullName(),
+        email: randEmail(),
+        message: randSentence(),
       },
       {
-        name: chance.name(),
-        email: chance.email(),
-        message: chance.sentence(),
+        name: randFullName(),
+        email: randEmail(),
+        message: randSentence(),
       },
       {
-        name: chance.name(),
-        email: chance.email(),
-        message: chance.sentence(),
+        name: randFullName(),
+        email: randEmail(),
+        message: randSentence(),
       },
     ]
 

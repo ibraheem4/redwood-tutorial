@@ -10,8 +10,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
+    "@ngneat/falso": "^6.4.0",
     "@redwoodjs/core": "3.8.0",
-    "chance": "^1.1.9",
     "husky": "^8.0.2",
     "lint-staged": ">=10",
     "prettier-plugin-tailwindcss": "^0.2.1",
