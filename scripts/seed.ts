@@ -18,6 +18,18 @@ const USER_PASSWORD = 'UserPassword'
 const USER_COUNT = 50
 const CONTACT_COUNT = 50
 
+const generateComments = () => {
+  const n = _randomInteger(0, 1000)
+  return Array(n)
+    .fill(null)
+    .map(() => {
+      return {
+        name: randFullName(),
+        body: randSentence(),
+      }
+    })
+}
+
 const seedAdminUsers = async () => {
   const users = [
     {
@@ -50,20 +62,7 @@ const seedAdminUsers = async () => {
                 title: randSentence(),
                 body: randParagraph(),
                 comments: {
-                  create: [
-                    {
-                      name: randFullName(),
-                      body: randSentence(),
-                    },
-                    {
-                      name: randFullName(),
-                      body: randSentence(),
-                    },
-                    {
-                      name: randFullName(),
-                      body: randSentence(),
-                    },
-                  ],
+                  create: generateComments(),
                 },
               },
               {
@@ -141,4 +140,9 @@ const _hashPassword = (text: string, salt?: string) => {
     CryptoJS.PBKDF2(text, useSalt, { keySize: 256 / 32 }).toString(),
     useSalt,
   ]
+}
+
+// Returns an integer random number between min (included) and max (included)
+const _randomInteger = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }
