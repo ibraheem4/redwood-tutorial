@@ -33,6 +33,8 @@
     "(web|api)/src/**/*.{js,jsx,ts,tsx}": "yarn rw lint --fix"
   },
   "scripts": {
+    "db:migrate": "yarn rw prisma migrate",
+    "db:migrate:dev": "yarn db:migrate dev",
     "db:reset": "yarn rw prisma migrate reset",
     "db:seed": "yarn rw prisma db seed",
     "db:studio": "yarn rw prisma studio",
