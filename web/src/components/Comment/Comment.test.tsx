@@ -30,6 +30,20 @@ describe('Comment', () => {
     )
   })
 
+  it('does not render a delete button if user is has "user" role', async () => {
+    mockCurrentUser({
+      id: '2e1923f3-e84c-4603-90a6-18302f95a3f8',
+      email: 'user@user.com',
+      roles: ['user'],
+    })
+
+    render(<Comment comment={COMMENT} />)
+
+    await waitFor(() =>
+      expect(screen.queryByText('Delete')).not.toBeInTheDocument()
+    )
+  })
+
   it('renders a delete button if the user is a moderator', async () => {
     mockCurrentUser({
       id: '5e1923f3-e84c-4603-90a6-18302f95a6f8',
